@@ -15,12 +15,9 @@ export class AdminAuthGuard implements CanActivate{
 
     // let mySubject: Subject<boolean>=new Subject<boolean>();
     
-    return this.authService.user$.pipe(
-        switchMap(user => 
-          {return this.userService.get(user?.uid) }
-          ),
+    return this.authService.appUser$.pipe(
           map(user => user.isAdmin)
-    )
+    )  
     // .subscribe(
     //   user=>{
     //       if(user.isAdmin){
