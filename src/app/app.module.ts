@@ -30,6 +30,11 @@ import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoryService } from './services/category.service';
 
+import { FormsModule } from '@angular/forms';
+import { ProductService } from './services/product.service';
+
+import { CustomFormsModule } from 'ng2-validation';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +56,9 @@ import { CategoryService } from './services/category.service';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    CustomFormsModule,
     NgbModule,
+    FormsModule,
     RouterModule.forRoot([
       {path:'', component: HomeComponent},
       {path:'products', component: ProductsComponent},
@@ -70,7 +77,8 @@ import { CategoryService } from './services/category.service';
   providers: [ AuthService,
     UserService,
     AdminAuthGuard,
-    CategoryService],
+    CategoryService,
+    ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
