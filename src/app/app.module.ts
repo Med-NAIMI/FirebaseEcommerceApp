@@ -65,8 +65,10 @@ import { CustomFormsModule } from 'ng2-validation';
       {path:'login', component: LoginComponent},
       {path:'shopping-cart', component: ShoppingCartComponent},
       
-      {path:'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard, AdminAuthGuard]},
+      
       {path:'admin/products/new', component: ProductFormComponent, canActivate: [ AuthGuard, AdminAuthGuard]},
+      {path:'admin/products/:id', component: ProductFormComponent, canActivate: [ AuthGuard, AdminAuthGuard]},
+      {path:'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard, AdminAuthGuard]},
       {path:'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminAuthGuard]},
       {path:'check-out', component: CheckOutComponent, canActivate: [AuthGuard]},
       {path:'my-orders', component: MyOrdersComponent, canActivate: [AuthGuard]},
