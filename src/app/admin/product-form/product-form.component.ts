@@ -13,7 +13,7 @@ import { take } from 'rxjs/operators';
 })
 export class ProductFormComponent implements OnInit {
   categories$: Observable<any>;
-  product:any;
+  product:any={};
   
   constructor(
     private router:Router,
