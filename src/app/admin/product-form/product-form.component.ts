@@ -14,6 +14,7 @@ import { take } from 'rxjs/operators';
 export class ProductFormComponent implements OnInit {
   categories$: Observable<any>;
   product:any={};
+  id: any;
   
   constructor(
     private router:Router,
@@ -22,17 +23,30 @@ export class ProductFormComponent implements OnInit {
     private productSerevice: ProductService) {
 
     this.categories$=categoryService.getCategories();
-    let id=this.route.snapshot.paramMap.get('id');
+    this.id=this.route.snapshot.paramMap.get('id');
 
-    if(id) this.productSerevice.getProductById(id).pipe(take(1)).subscribe(product=> this.product=product);
+    if(this.id) this.productSerevice.getProductById(this.id).pipe(take(1)).subscribe(product=> this.product=product);
    }
 
    save(product: any){
-     this.productSerevice.create(product);
+     if(this.id) 
+     {this.productSerevice.update(this.id, product);}
+     else 
+     {this.productSerevice.create(product);}
+
      this.router.navigate(['/admin/products']);
+   }
+
+   delete(){
+    if(!confirm('Are you sure you want to delete this item!')) return;
+
+    this.productSerevice.delete(this.id);
+    this.router.navigate(['/admin/products']);
    }
 
   ngOnInit(): void {
   }
+
+
 
 }

@@ -13,7 +13,16 @@ export class ProductService {
   constructor(private db: AngularFireDatabase) { }
 
   create(product: any){
-    return this.db.list('/products').push(product)
+    return this.db.list('/products').push(product);
+  }
+
+  update(productId: any, product:any){
+    return this.db.object('/products/'+productId).update(product);
+    
+  }
+
+  delete(productId:any){
+    this.db.object('/products/'+productId).remove();
   }
 
   getAll(){
@@ -40,7 +49,7 @@ export class ProductService {
     .pipe(map(data=> ({category:data[0], imageUrl:data[1], price:data[2], title:data[3]}))).subscribe(p=>console.log(p.imageUrl));*/
 
     return this.db.list('/products/'+productId).valueChanges()
-    .pipe(map(data=> ({category:data[0], url:data[1], price:data[2], title:data[3]})));
+    .pipe(map(data=> ({category:data[0], url:data[1], price:data[2], title:data[3]})));//Mosh used .object instead of .list
   }
 
 
